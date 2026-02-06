@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import CountUp from 'react-countup'
 import { ArrowRight } from 'lucide-react'
+import { asset } from '@/lib/asset'
 
 export const Route = createFileRoute('/')({ component: HomePage })
 
@@ -56,11 +57,11 @@ function HomePage() {
   ]
 
   const categories = [
-    { label: 'Crop Protection', img: '/stock-photo-spraying-machine-working-on-the-green-field-232741255.jpg' },
-    { label: 'Biostimulants', img: '/biostimulants.png' },
-    { label: 'Adjuvants', img: '/stock-photo-rice-is-a-useful-grain-that-is-an-agricultural-crop-that-thai-people-grow-in-large-numbers-for-2401627057.jpg' },
-    { label: 'Nutritionals', img: '/nutritionals.png' },
-    { label: 'Seed', img: '/seed.png' },
+    { label: 'Crop Protection', img: asset('stock-photo-spraying-machine-working-on-the-green-field-232741255.jpg') },
+    { label: 'Biostimulants', img: asset('biostimulants.png') },
+    { label: 'Adjuvants', img: asset('stock-photo-rice-is-a-useful-grain-that-is-an-agricultural-crop-that-thai-people-grow-in-large-numbers-for-2401627057.jpg') },
+    { label: 'Nutritionals', img: asset('nutritionals.png') },
+    { label: 'Seed', img: asset('seed.png') },
   ]
 
   useEffect(() => {
@@ -78,19 +79,19 @@ function HomePage() {
   }, [categories.length])
 
   const infoCards = [
-    { img: '/carousel-corn-leaves.png', title: 'How It', accent: 'Works.', items: [
+    { img: asset('carousel-corn-leaves.png'), title: 'How It', accent: 'Works.', items: [
       { bold: 'Embedded at Point of Sale', desc: 'Financing built directly into manufacturer programs.' },
       { bold: 'Instant Application', desc: 'Growers apply digitally in minutes.' },
       { bold: 'Immediate Approval & Funding', desc: 'Complete purchases without delays.' },
       { bold: 'Intelligence & Optimization', desc: 'Real-time data powers smarter decisions.' },
     ]},
-    { img: '/carousel-corn-cob.png', title: 'Ag Financing', accent: 'Platform.', items: [
+    { img: asset('carousel-corn-cob.png'), title: 'Ag Financing', accent: 'Platform.', items: [
       { bold: 'Up to $1M Credit Lines', desc: 'Large approvals for serious growers.' },
       { bold: 'Flexible Repayment', desc: 'Terms aligned to harvest cycles.' },
       { bold: 'Same-Day Funding', desc: 'Retailers get paid fast, every time.' },
       { bold: '100% Digital', desc: 'Zero paperwork, fully online process.' },
     ]},
-    { img: '/carousel-farmer.png', title: 'Competitive', accent: 'Advantage.', items: [
+    { img: asset('carousel-farmer.png'), title: 'Competitive', accent: 'Advantage.', items: [
       { bold: 'Embedded at Point of Sale', desc: 'Offer financing directly within your existing workflow.' },
       { bold: 'Branded Portals', desc: 'White-label retailer and grower portals, out of the box.' },
       { bold: 'Seamless Integration', desc: 'Connects with your CRMs, ERPs, and commerce sites.' },
@@ -118,7 +119,7 @@ function HomePage() {
             playsInline
             className="w-full h-full object-cover"
           >
-            <source src="/teavalley-preview.mp4" type="video/mp4" />
+            <source src={asset('teavalley-preview.mp4')} type="video/mp4" />
           </video>
           {/* Gradient overlay for text readability */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
@@ -196,7 +197,7 @@ function HomePage() {
             >
               <div className="rounded-2xl overflow-hidden shadow-2xl shadow-black/10 aspect-[4/3]">
                 <img
-                  src="/seeder-v2.png"
+                  src={asset('seeder-v2.png')}
                   alt="Agricultural seeder in field"
                   className="w-full h-full object-cover"
                 />
@@ -396,7 +397,7 @@ function HomePage() {
               transition={{ duration: 0.6 }}
               className="rounded-2xl overflow-hidden shadow-lg"
             >
-              <img src="/retailer-hero.png" alt="For Retailers" className="w-full h-full object-cover" />
+              <img src={asset('retailer-hero.png')} alt="For Retailers" className="w-full h-full object-cover" />
             </motion.div>
 
             {/* Content */}
@@ -485,7 +486,7 @@ function HomePage() {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="rounded-2xl overflow-hidden shadow-lg order-1 md:order-2"
             >
-              <img src="/manufacturer-hero.png" alt="For Manufacturers" className="w-full h-full object-cover" />
+              <img src={asset('manufacturer-hero.png')} alt="For Manufacturers" className="w-full h-full object-cover" />
             </motion.div>
           </div>
         </div>

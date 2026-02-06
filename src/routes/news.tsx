@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { Calendar, ArrowRight } from 'lucide-react'
+import { asset } from '@/lib/asset'
 
 export const Route = createFileRoute('/news')({ component: NewsPage })
 
@@ -64,7 +65,7 @@ function NewsPage() {
             playsInline
             className="w-full h-full object-cover"
           >
-            <source src="/news-hero-video.mp4" type="video/mp4" />
+            <source src={asset('news-hero-video.mp4')} type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
         </div>

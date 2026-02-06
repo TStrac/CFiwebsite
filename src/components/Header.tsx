@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from '@tanstack/react-router'
 import { Menu, X } from 'lucide-react'
+import { asset } from '@/lib/asset'
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -33,7 +34,7 @@ export default function Header() {
       <header className="absolute top-0 left-0 right-0 z-40 px-4 sm:px-6 pt-4">
         <nav className="max-w-7xl mx-auto rounded-2xl px-4 sm:px-6 py-3 flex items-center justify-between bg-transparent">
           <Link to="/" className="shrink-0">
-            <img src="/logo-cfi.png" alt="CFi" className="h-10 sm:h-12 w-auto" />
+            <img src={asset('logo-cfi.png')} alt="CFi" className="h-10 sm:h-12 w-auto" />
           </Link>
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
@@ -102,7 +103,7 @@ export default function Header() {
       >
         <nav className="w-full px-6 sm:px-10 lg:px-16 py-3 flex items-center justify-between bg-[#f7faf5] shadow-lg">
           <Link to="/" className="shrink-0">
-            <img src="/logo-cfi.png" alt="CFi" className="h-10 sm:h-12 w-auto" />
+            <img src={asset('logo-cfi.png')} alt="CFi" className="h-10 sm:h-12 w-auto" />
           </Link>
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
