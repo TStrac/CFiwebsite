@@ -207,16 +207,16 @@ function HomePage() {
 
 
       {/* ============ INFO CAROUSEL ============ */}
-      <section className="py-12 md:py-20 bg-[#f7faf5] overflow-hidden">
-        <div className="flex overflow-x-auto scrollbar-hide snap-x snap-mandatory gap-6 px-6 sm:px-12 lg:px-16" style={{ scrollBehavior: 'smooth' }}>
+      <section className="pt-10 md:pt-14 pb-14 md:pb-18 bg-[#f7faf5]">
+        <div className="flex overflow-x-auto scrollbar-hide snap-x snap-mandatory gap-6 px-6 sm:px-12 lg:px-16 pb-4" style={{ scrollBehavior: 'smooth' }}>
           {[
-            { img: 'https://placecats.com/600/300', title: 'How It', accent: 'Works.', items: [
+            { img: '/carousel-corn-leaves.png', title: 'How It', accent: 'Works.', items: [
               { bold: 'Embedded at Point of Sale', desc: 'Financing built directly into manufacturer programs.' },
               { bold: 'Instant Application', desc: 'Growers apply digitally in minutes.' },
               { bold: 'Immediate Approval & Funding', desc: 'Complete purchases without delays.' },
               { bold: 'Intelligence & Optimization', desc: 'Real-time data powers smarter decisions.' },
             ]},
-            { img: 'https://placecats.com/601/300', title: 'Ag Financing', accent: 'Platform.', items: [
+            { img: '/carousel-corn-cob.png', title: 'Ag Financing', accent: 'Platform.', items: [
               { bold: 'Up to $1M Credit Lines', desc: 'Large approvals for serious growers.' },
               { bold: 'Flexible Repayment', desc: 'Terms aligned to harvest cycles.' },
               { bold: 'Same-Day Funding', desc: 'Retailers get paid fast, every time.' },
@@ -249,7 +249,7 @@ function HomePage() {
           {/* Competitive Advantage */}
           <div className="shrink-0 w-[85vw] sm:w-[45vw] lg:w-[31%] snap-start bg-white rounded-lg shadow-md overflow-hidden">
             <div className="h-64 overflow-hidden">
-              <img src="https://placecats.com/602/300" alt="" className="w-full h-full object-cover" />
+              <img src="/carousel-farmer.png" alt="" className="w-full h-full object-cover" />
             </div>
             <div className="px-7 py-7">
               <h3 className="text-xl font-bold text-gray-900 mb-5">
@@ -291,7 +291,7 @@ function HomePage() {
       </section>
 
       {/* ============ CATEGORIES HEADER ============ */}
-      <section className="pt-16 md:pt-24 pb-4 px-4 sm:px-6 bg-[#f7faf5]">
+      <section className="pt-8 md:pt-12 pb-4 px-4 sm:px-6 bg-[#f7faf5]">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-gray-900 text-center">
           Supporting The Full Spectrum Of <span className="text-emerald-800 font-bold italic">Agricultural Inputs.</span>
         </h2>

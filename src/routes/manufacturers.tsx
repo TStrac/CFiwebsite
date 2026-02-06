@@ -53,24 +53,32 @@ function ManufacturersPage() {
               Manufacturing leaders face unprecedented pressure to differentiate at the critical retail point of sale.
             </p>
           </div>
-          {/* Alternating left-right layout */}
-          <div className="space-y-8">
-            {[
-              { title: 'Traditional Financing Falls Short', desc: 'Purely transactional, without any strategic influence at the point of sale.' },
-              { title: 'No Access to Retail Network', desc: 'Limited to your own partner network with no broader reach.' },
-              { title: 'Visibility Gap Costs Millions', desc: 'Lacking real-time data — marketing relies on outdated signals.' },
-              { title: 'Retailers Choose Winners', desc: 'Retailers favor manufacturers who equip them to boost engagement and sales.' },
-            ].map((item, i) => (
-              <div key={i} className={`flex items-center gap-6 ${i % 2 === 1 ? 'flex-row-reverse' : ''}`}>
-                <div className="hidden sm:block w-12 h-12 shrink-0 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-lg">
-                  <span className="flex items-center justify-center w-full h-full">{i + 1}</span>
-                </div>
-                <div className={`flex-1 bg-white rounded-xl p-6 shadow-sm border-l-4 border-emerald-600 ${i % 2 === 1 ? 'border-l-0 border-r-4' : ''}`}>
-                  <h3 className="text-lg font-bold text-gray-900 mb-1">{item.title}</h3>
-                  <p className="text-gray-500 text-sm">{item.desc}</p>
-                </div>
+          {/* Timeline + Image layout */}
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="relative">
+              <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-emerald-200 hidden sm:block" />
+              <div className="space-y-10">
+                {[
+                  { title: 'Traditional Financing Falls Short', desc: 'Purely transactional, without any strategic influence at the point of sale.' },
+                  { title: 'No Access to Retail Network', desc: 'Limited to your own partner network with no broader reach.' },
+                  { title: 'Visibility Gap Costs Millions', desc: 'Lacking real-time data — marketing relies on outdated signals.' },
+                  { title: 'Retailers Choose Winners', desc: 'Retailers favor manufacturers who equip them to boost engagement and sales.' },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-6 sm:pl-0">
+                    <div className="relative z-10 w-12 h-12 shrink-0 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-sm shadow-lg">
+                      {String(i + 1).padStart(2, '0')}
+                    </div>
+                    <div className="pt-1">
+                      <h3 className="text-lg font-bold text-gray-900 mb-1">{item.title}</h3>
+                      <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+            <div className="rounded-2xl overflow-hidden shadow-lg hidden md:block">
+              <img src="/scientist-greenhouse.png" alt="Agricultural scientist" className="w-full h-full object-cover" />
+            </div>
           </div>
         </div>
       </section>
@@ -171,10 +179,10 @@ function ManufacturersPage() {
           <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div>
               <span className="text-sm font-semibold text-emerald-700 tracking-widest uppercase mb-4 block">
-                No Risk — Just Reward
+                Partner with CFi
               </span>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 leading-snug mb-8">
-                Partnering with CFi <span className="text-emerald-700">has its benefits</span>
+                No Risk — <span className="text-emerald-700">Just Reward</span>
               </h2>
               <ul className="space-y-6">
                 {[
@@ -277,7 +285,7 @@ function ManufacturersPage() {
 
       {/* ============ FAQ ============ */}
       <section className="py-16 md:py-24 px-4 sm:px-6 bg-[#f7faf5]">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
               Frequently Asked <span className="text-emerald-700">Questions</span>
@@ -312,56 +320,90 @@ function ManufacturersPage() {
   )
 }
 
-const manufacturerFaqs = [
+const mfgFaqCategories = [
   {
-    q: 'Why should my company partner with CFi?',
-    a: 'As a CFi manufacturer partner, you gain access to our network of 100+ active dealers, SKU-level sales intelligence, category benchmarking, and regional demand heatmaps. You\'ll differentiate at the point of sale with financing that drives volume and loyalty.',
+    category: 'Getting Started',
+    questions: [
+      { q: 'Why should my company partner with CFi?', a: 'As a CFi manufacturer partner, you gain access to our network of 100+ active dealers, SKU-level sales intelligence, category benchmarking, and regional demand heatmaps. You\'ll differentiate at the point of sale with financing that drives volume and loyalty.' },
+      { q: 'How do I get started as a manufacturer partner?', a: 'Getting started is simple — tell us about your crop input business, select products for the financing program, and we\'ll design interest and repayment terms together. Fill out our contact form and a member of our Partnerships team will reach out.' },
+      { q: 'What is the cost to become a partner?', a: 'Sign-up is free. CFi offers simple, transparent pricing with no hidden fees. Contact our team to learn more about our partnership terms.' },
+    ],
   },
   {
-    q: 'How does CFi help me align marketing spend to demand?',
-    a: 'CFi connects your marketing investment directly to real purchasing activity with measurable ROI. Our platform provides real-time data on what products are moving, where, and at what velocity — so you can deploy resources with precision.',
+    category: 'Programs & Financing',
+    questions: [
+      { q: 'How does the buy-down program work?', a: 'You select which products benefit from a strategic buy-down, then design tailored interest rates and repayment schedules aligned with seasonality. CFi handles the financing lifecycle while you gain visibility into adoption and performance.' },
+      { q: 'Can I customize financing terms?', a: 'Yes. You design the interest rates and repayment periods that align with your seasonality and product categories. CFi gives you full control over your program structure.' },
+      { q: 'What products can be financed?', a: 'CFi supports the full spectrum of agricultural inputs — crop protection, biostimulants, adjuvants, nutritionals, and seed.' },
+    ],
   },
   {
-    q: 'What intelligence does CFi provide?',
-    a: 'CFi is the only platform combining financing power with intelligence at scale. You get SKU-level sales tracking, category benchmarking against competitors, and regional movement heatmaps to visualize geographic demand patterns and identify emerging markets.',
+    category: 'Intelligence & Data',
+    questions: [
+      { q: 'What intelligence does CFi provide?', a: 'CFi is the only platform combining financing power with intelligence at scale. You get SKU-level sales tracking, category benchmarking against competitors, and regional movement heatmaps to visualize geographic demand patterns and identify emerging markets.' },
+      { q: 'How does CFi help me align marketing spend to demand?', a: 'CFi connects your marketing investment directly to real purchasing activity with measurable ROI. Our platform provides real-time data on what products are moving, where, and at what velocity — so you can deploy resources with precision.' },
+    ],
   },
   {
-    q: 'How does the buy-down program work?',
-    a: 'You select which products benefit from a strategic buy-down, then design tailored interest rates and repayment schedules aligned with seasonality. CFi handles the financing lifecycle while you gain visibility into adoption and performance.',
-  },
-  {
-    q: 'How do I get started as a manufacturer partner?',
-    a: 'Getting started is simple — tell us about your crop input business, select products for the financing program, and we\'ll design interest and repayment terms together. Fill out our contact form and a member of our Partnerships team will reach out.',
+    category: 'Integration & Support',
+    questions: [
+      { q: 'How does CFi integrate with our existing systems?', a: 'CFi provides branded retailer and grower portals out of the box, and our team helps integrate financing into your existing CRMs, ERPs, and dealer management platforms. Most integrations are completed within days.' },
+      { q: 'Do we get dedicated support?', a: 'Yes. Every manufacturer partner is paired with a dedicated partner manager who handles onboarding, tech support, and ongoing optimization.' },
+      { q: 'How does CFi strengthen retailer relationships?', a: 'By equipping your retail partners with embedded financing tools, you help them boost engagement and sales. Retailers favor manufacturers who give them a competitive edge — CFi makes you that manufacturer.' },
+    ],
   },
 ]
 
 function ManufacturerFaq() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const [openCategory, setOpenCategory] = useState<string>(mfgFaqCategories[0].category)
+  const [openQuestion, setOpenQuestion] = useState<string | null>(null)
 
   return (
-    <div className="space-y-3">
-      {manufacturerFaqs.map((faq, i) => (
-        <div key={i} className="bg-white rounded-lg shadow-sm overflow-hidden">
+    <div className="grid md:grid-cols-[240px_1fr] gap-8">
+      {/* Category sidebar */}
+      <div className="flex md:flex-col gap-2 overflow-x-auto scrollbar-hide md:overflow-visible">
+        {mfgFaqCategories.map((cat) => (
           <button
-            onClick={() => setOpenIndex(openIndex === i ? null : i)}
-            className="w-full flex items-center justify-between px-6 py-5 text-left"
-          >
-            <span className="font-semibold text-gray-900 text-sm sm:text-base pr-4">{faq.q}</span>
-            <ChevronDown
-              className={`w-5 h-5 text-emerald-700 shrink-0 transition-transform duration-300 ${
-                openIndex === i ? 'rotate-180' : ''
-              }`}
-            />
-          </button>
-          <div
-            className={`overflow-hidden transition-all duration-300 ${
-              openIndex === i ? 'max-h-60 pb-5' : 'max-h-0'
+            key={cat.category}
+            onClick={() => { setOpenCategory(cat.category); setOpenQuestion(null) }}
+            className={`text-left px-4 py-3 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+              openCategory === cat.category
+                ? 'bg-emerald-700 text-white shadow-md'
+                : 'bg-white text-gray-600 hover:bg-emerald-50 hover:text-emerald-700'
             }`}
           >
-            <p className="px-6 text-gray-500 text-sm leading-relaxed">{faq.a}</p>
-          </div>
-        </div>
-      ))}
+            {cat.category}
+          </button>
+        ))}
+      </div>
+
+      {/* Questions */}
+      <div className="space-y-3">
+        {mfgFaqCategories
+          .find((cat) => cat.category === openCategory)
+          ?.questions.map((faq, i) => (
+            <div key={i} className="bg-white rounded-lg shadow-sm overflow-hidden">
+              <button
+                onClick={() => setOpenQuestion(openQuestion === faq.q ? null : faq.q)}
+                className="w-full flex items-center justify-between px-6 py-5 text-left"
+              >
+                <span className="font-semibold text-gray-900 text-sm sm:text-base pr-4">{faq.q}</span>
+                <ChevronDown
+                  className={`w-5 h-5 text-emerald-700 shrink-0 transition-transform duration-300 ${
+                    openQuestion === faq.q ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
+              <div
+                className={`overflow-hidden transition-all duration-300 ${
+                  openQuestion === faq.q ? 'max-h-60 pb-5' : 'max-h-0'
+                }`}
+              >
+                <p className="px-6 text-gray-500 text-sm leading-relaxed">{faq.a}</p>
+              </div>
+            </div>
+          ))}
+      </div>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import { Calendar, ArrowRight } from 'lucide-react'
 
 export const Route = createFileRoute('/news')({ component: NewsPage })
@@ -53,31 +53,43 @@ function NewsPage() {
   const regularArticles = articles.filter(a => !a.featured)
 
   return (
-    <div className="min-h-screen bg-[#f7faf5] pt-24">
-      {/* Hero */}
-      <section className="py-16 md:py-24 px-4 sm:px-6 bg-gradient-to-br from-emerald-50 via-white to-emerald-50">
-        <div className="max-w-4xl mx-auto text-center">
-          <span className="text-sm font-bold text-emerald-600 tracking-widest uppercase mb-4 block">
+    <div className="min-h-screen bg-[#f7faf5] overflow-x-hidden">
+      {/* ============ HERO ============ */}
+      <section className="relative min-h-[70vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src="/news-hero-video.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
+        </div>
+        <div className="relative z-10 w-full px-6 sm:px-12 lg:px-24 pt-32 pb-20">
+          <span className="text-sm font-semibold text-emerald-400 tracking-widest uppercase mb-4 block">
             Insights & News
           </span>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 leading-tight mb-6">
-            Stay <span className="text-emerald-600">informed</span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-[1.1] mb-6 max-w-3xl">
+            Stay Informed
           </h1>
-          <p className="text-lg sm:text-xl text-gray-500 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-white/90 font-light mb-10 max-w-xl leading-relaxed">
             The latest news, insights, and updates from CFi and the agricultural financing industry.
           </p>
         </div>
       </section>
 
-      {/* Featured Article */}
+      {/* ============ FEATURED ARTICLE ============ */}
       {featuredArticle && (
-        <section className="py-8 px-4 sm:px-6">
+        <section className="py-12 px-4 sm:px-6 bg-[#f7faf5]">
           <div className="max-w-6xl mx-auto">
-            <div className="bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-2xl p-8 sm:p-12 text-white">
+            <div className="bg-emerald-800 rounded-2xl p-8 sm:p-12 text-white">
               <span className="inline-block px-3 py-1 bg-white/20 rounded-full text-sm font-medium mb-4">
                 Featured
               </span>
-              <h2 className="text-3xl sm:text-4xl font-black mb-4">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
                 {featuredArticle.title}
               </h2>
               <p className="text-emerald-100 text-lg mb-6 max-w-2xl">
@@ -97,14 +109,14 @@ function NewsPage() {
         </section>
       )}
 
-      {/* Articles Grid */}
-      <section className="py-16 px-4 sm:px-6">
+      {/* ============ ARTICLES GRID ============ */}
+      <section className="py-12 md:py-16 px-4 sm:px-6 bg-[#f7faf5]">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {regularArticles.map((article, i) => (
               <article
                 key={i}
-                className="bg-white rounded-2xl p-6 border border-gray-100 hover:border-emerald-200 hover:shadow-xl hover:shadow-emerald-100/50 transition-all duration-300 cursor-pointer"
+                className="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
               >
                 <span className="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-medium mb-4">
                   {article.category}
@@ -112,7 +124,7 @@ function NewsPage() {
                 <h3 className="text-xl font-bold text-gray-900 mb-3">
                   {article.title}
                 </h3>
-                <p className="text-gray-500 mb-4 leading-relaxed">
+                <p className="text-gray-500 mb-4 leading-relaxed text-sm">
                   {article.excerpt}
                 </p>
                 <div className="flex items-center justify-between">
@@ -128,28 +140,47 @@ function NewsPage() {
         </div>
       </section>
 
-      {/* Newsletter CTA */}
-      <section className="py-16 md:py-24 px-4 sm:px-6 bg-gray-50">
+      {/* ============ NEWSLETTER CTA ============ */}
+      <section className="py-16 md:py-24 px-4 sm:px-6 bg-[#dde6d5]">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4">
-            Subscribe to our newsletter
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Subscribe to Our Newsletter
           </h2>
-          <p className="text-gray-500 mb-8">
+          <p className="text-gray-600 mb-8">
             Get the latest insights and news delivered directly to your inbox.
           </p>
           <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <input
               type="email"
               placeholder="Enter your email"
-              className="flex-1 px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-emerald-500"
+              className="flex-1 px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-emerald-500 bg-white"
             />
             <button
               type="submit"
-              className="px-6 py-3 bg-emerald-600 text-white font-semibold rounded-lg hover:bg-emerald-700 transition-colors"
+              className="px-6 py-3 bg-emerald-700 text-white font-semibold rounded-lg hover:bg-emerald-800 transition-colors"
             >
               Subscribe
             </button>
           </form>
+        </div>
+      </section>
+
+      {/* ============ CTA ============ */}
+      <section className="py-20 md:py-24 px-4 sm:px-6 bg-[#f7faf5]">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 mb-6">
+            Ag Finance. <span className="text-emerald-700">Delivered.</span>
+          </h2>
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-10">
+            Ready to grow your business? Get started today.
+          </p>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 bg-emerald-700 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-emerald-800 transition-colors"
+          >
+            Contact Us
+            <ArrowRight className="w-5 h-5" />
+          </Link>
         </div>
       </section>
     </div>
