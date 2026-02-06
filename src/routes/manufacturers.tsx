@@ -183,7 +183,7 @@ function ManufacturersPage() {
                 Partner with CFi
               </span>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 leading-snug mb-8">
-                No Risk — <span className="text-emerald-700">Just Reward</span>
+                No Risk, <span className="text-emerald-700">Just Rewards</span>
               </h2>
               <ul className="space-y-6">
                 {[

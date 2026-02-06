@@ -1,9 +1,94 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
-import { ArrowRight, ChevronDown } from 'lucide-react'
+import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react'
 import { asset } from '@/lib/asset'
 
 export const Route = createFileRoute('/retailers')({ component: RetailersPage })
+
+const actionSteps = [
+  {
+    step: 'STEP 1',
+    title: 'Apply in Minutes',
+    desc: 'Growers complete a simple digital application in just 5 minutes.',
+  },
+  {
+    step: 'STEP 2',
+    title: 'Get Fast Approval',
+    desc: 'Quick review and approval so growers can access funds without delay.',
+  },
+  {
+    step: 'STEP 3',
+    title: 'Choose a Payment Plan That Fits',
+    desc: "Flexible repayment terms up to 18 months, designed around your farm's cash flow and order size.",
+  },
+  {
+    step: 'STEP 4',
+    title: 'Purchase and Grow',
+    desc: 'Place orders with your preferred suppliers, receive your products, and pay over time with manageable, transparent installments.',
+  },
+]
+
+function CfiInActionCarousel() {
+  const [current, setCurrent] = useState(0)
+
+  const next = () => setCurrent((prev) => (prev + 1) % actionSteps.length)
+  const prev = () => setCurrent((prev) => (prev - 1 + actionSteps.length) % actionSteps.length)
+
+  return (
+    <div>
+      {/* Single card view */}
+      <div className="relative rounded-2xl overflow-hidden shadow-xl bg-[#dde6d5]">
+        <div className="absolute inset-0">
+          <img src={asset('hero-bg.png')} alt="" className="w-full h-full object-cover opacity-20" />
+        </div>
+
+        <div className="relative z-10 px-16 sm:px-24 py-12 sm:py-16 flex flex-col justify-center min-h-[340px]">
+          <span className="text-emerald-700 text-xs font-bold tracking-widest uppercase mb-3">
+            {actionSteps[current].step}
+          </span>
+          <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+            {actionSteps[current].title}
+          </h3>
+          <p className="text-gray-700 leading-relaxed max-w-lg">
+            {actionSteps[current].desc}
+          </p>
+        </div>
+      </div>
+
+      {/* Navigation arrows + dots below */}
+      <div className="flex items-center justify-center gap-6 mt-6">
+        <button
+          onClick={prev}
+          type="button"
+          className="w-10 h-10 rounded-full bg-white hover:bg-emerald-50 shadow-md flex items-center justify-center transition-colors border border-gray-200"
+        >
+          <ChevronLeft className="w-5 h-5 text-gray-700" />
+        </button>
+
+        <div className="flex gap-2">
+          {actionSteps.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setCurrent(i)}
+              className={`w-2.5 h-2.5 rounded-full transition-colors ${
+                i === current ? 'bg-emerald-700' : 'bg-gray-300'
+              }`}
+            />
+          ))}
+        </div>
+
+        <button
+          onClick={next}
+          type="button"
+          className="w-10 h-10 rounded-full bg-white hover:bg-emerald-50 shadow-md flex items-center justify-center transition-colors border border-gray-200"
+        >
+          <ChevronRight className="w-5 h-5 text-gray-700" />
+        </button>
+      </div>
+    </div>
+  )
+}
 
 function RetailersPage() {
   const [activeTab, setActiveTab] = useState<'growers' | 'business'>('growers')
@@ -74,13 +159,14 @@ function RetailersPage() {
                 CFi for <span className="text-emerald-700">Growers</span>
               </h2>
               <p className="text-gray-600 leading-relaxed mb-8 max-w-4xl mx-auto">
-                Growers can finance seeds, fertilizer, crop protection, and other essential crop inputs for their business.
+                CFi helps growers access the financing they need to grow their business, whether buying seeds, fertilizers, equipment, or other agricultural inputs.
               </p>
               <div className="text-left space-y-6 mb-10">
                 {[
-                  { title: 'Buy what you need', desc: 'Purchase from preferred suppliers with clear, transparent financing terms and flexible repayment options of up to 18 months.' },
-                  { title: 'Pay on your schedule', desc: 'Payments can be made at any time during the term, giving growers flexibility to manage cash flow around the season.' },
-                  { title: 'Apply in minutes', desc: 'Complete a simple digital application and receive a fast credit decision so orders can move forward without delay.' },
+                  { title: 'Flexible financing for all orders', desc: 'Pay for your farm inputs in manageable installments.' },
+                  { title: 'Customizable payment plans', desc: 'Choose repayment terms up to 18 months, with your first payment starting in July and subsequent installments spread evenly until January of the following year, giving you the flexibility to match your farm\'s cash flow and seasonal income.' },
+                  { title: 'Fast and simple approval', desc: 'Complete the digital application in minutes and get approved quickly so you can place orders immediately.' },
+                  { title: 'Sign Up', desc: 'Join CFi to unlock flexible, grower-focused financing and fuel the growth of your farm business.' },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-4">
                     <span className="text-emerald-600 mt-1 font-bold text-lg">&#10003;</span>
@@ -134,34 +220,18 @@ function RetailersPage() {
         </div>
       </section>
 
-      {/* ============ CFi IN ACTION CAROUSEL ============ */}
+      {/* ============ CFi IN ACTION ============ */}
       <section className="py-16 md:py-24 px-4 sm:px-6 bg-[#dde6d5]">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <span className="text-sm font-semibold text-emerald-700 tracking-widest uppercase mb-4 block">
-              CFi in Action
+              How It Works
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
-              How It <span className="text-emerald-700">Works</span>
+              CFi in <span className="text-emerald-700">Action</span>
             </h2>
           </div>
-          <div className="flex overflow-x-auto scrollbar-hide snap-x snap-mandatory gap-6 sm:grid sm:grid-cols-2 lg:grid-cols-5 sm:overflow-visible sm:snap-none">
-            {[
-              { step: '01', title: 'Apply in Minutes', desc: 'Growers complete a simple digital application in just 5 minutes.' },
-              { step: '02', title: 'Get Fast Approval', desc: 'Quick review and approval so growers can access funds without delay.' },
-              { step: '03', title: 'Choose a Payment Plan', desc: 'Flexible repayment terms up to 18 months, aligned with farm cash flow and order size.' },
-              { step: '04', title: 'Purchase and Grow', desc: 'Growers place orders with you, receive their products, and pay over time with manageable, transparent installments.' },
-              { step: '05', title: 'One Retail Portal', desc: 'Access all grower applications, approvals, credit status, and transactions in a single CFi dashboard — branded for your business.' },
-            ].map((item, i) => (
-              <div key={i} className="shrink-0 w-[75vw] sm:w-auto snap-start bg-white rounded-xl p-6 shadow-md flex flex-col">
-                <div className="w-10 h-10 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-sm mb-4">
-                  {item.step}
-                </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed flex-1">{item.desc}</p>
-              </div>
-            ))}
-          </div>
+          <CfiInActionCarousel />
         </div>
       </section>
 
