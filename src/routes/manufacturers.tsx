@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import { ArrowRight, ChevronDown } from 'lucide-react'
+import { asset } from '@/lib/asset'
 
 export const Route = createFileRoute('/manufacturers')({ component: ManufacturersPage })
 
@@ -17,7 +18,7 @@ function ManufacturersPage() {
             playsInline
             className="w-full h-full object-cover"
           >
-            <source src="/manufacturer-hero-video.mp4" type="video/mp4" />
+            <source src={asset('manufacturer-hero-video.mp4')} type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
         </div>
@@ -77,7 +78,7 @@ function ManufacturersPage() {
               </div>
             </div>
             <div className="rounded-2xl overflow-hidden shadow-lg hidden md:block">
-              <img src="/scientist-greenhouse.png" alt="Agricultural scientist" className="w-full h-full object-cover" />
+              <img src={asset('scientist-greenhouse.png')} alt="Agricultural scientist" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
@@ -203,7 +204,7 @@ function ManufacturersPage() {
               </ul>
             </div>
             <div className="rounded-2xl overflow-hidden shadow-lg">
-              <img src="/handshake-field.png" alt="Partner with CFi" className="w-full h-full object-cover" />
+              <img src={asset('handshake-field.png')} alt="Partner with CFi" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>

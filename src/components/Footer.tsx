@@ -1,4 +1,5 @@
 import { Link } from '@tanstack/react-router'
+import { asset } from '@/lib/asset'
 
 export default function Footer() {
   return (
@@ -6,7 +7,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           <div>
-            <img src="/logo-cfi.png" alt="CFi" className="h-8 w-auto" />
+            <img src={asset('logo-cfi.png')} alt="CFi" className="h-8 w-auto" />
             <p className="text-gray-400 mt-4 text-sm leading-relaxed">
               The fastest agricultural input financing platform.
             </p>

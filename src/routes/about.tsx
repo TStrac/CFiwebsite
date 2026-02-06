@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import { ArrowRight, ChevronDown } from 'lucide-react'
+import { asset } from '@/lib/asset'
 
 export const Route = createFileRoute('/about')({ component: AboutPage })
 
@@ -119,7 +120,7 @@ function AboutPage() {
             playsInline
             className="w-full h-full object-cover"
           >
-            <source src="/soyfield-preview.mp4" type="video/mp4" />
+            <source src={asset('soyfield-preview.mp4')} type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
         </div>
@@ -172,7 +173,7 @@ function AboutPage() {
             </div>
 
             <div className="rounded-2xl overflow-hidden shadow-lg">
-              <img src="/seeder-v2.png" alt="Agricultural equipment" className="w-full h-full object-cover" />
+              <img src={asset('seeder-v2.png')} alt="Agricultural equipment" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>

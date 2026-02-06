@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import { ArrowRight, ChevronDown } from 'lucide-react'
+import { asset } from '@/lib/asset'
 
 export const Route = createFileRoute('/retailers')({ component: RetailersPage })
 
@@ -12,7 +13,7 @@ function RetailersPage() {
       {/* ============ HERO ============ */}
       <section className="relative min-h-[70vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img src="/hero-bg.png" alt="" className="w-full h-full object-cover" />
+          <img src={asset('hero-bg.png')} alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
         </div>
         <div className="relative z-10 w-full px-6 sm:px-12 lg:px-24 pt-32 pb-20">
