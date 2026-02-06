@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           <div>
             <img src={asset('logo-cfi.png')} alt="CFi" className="h-8 w-auto" />
-            <p className="text-gray-400 mt-4 text-sm leading-relaxed">
+            <p className="text-gray-300 mt-4 text-sm leading-relaxed font-medium">
               The fastest agricultural input financing platform.
             </p>
           </div>
@@ -24,7 +24,7 @@ export default function Footer() {
                 <li key={item.label}>
                   <Link
                     to={item.to}
-                    className="text-gray-400 hover:text-emerald-400 text-sm transition-colors"
+                    className="text-gray-300 hover:text-emerald-400 text-sm font-medium transition-colors"
                   >
                     {item.label}
                   </Link>
@@ -42,7 +42,7 @@ export default function Footer() {
                 <li key={item.label}>
                   <Link
                     to={item.to}
-                    className="text-gray-400 hover:text-emerald-400 text-sm transition-colors"
+                    className="text-gray-300 hover:text-emerald-400 text-sm font-medium transition-colors"
                   >
                     {item.label}
                   </Link>
@@ -52,7 +52,7 @@ export default function Footer() {
           </div>
           <div>
             <h4 className="font-bold text-white mb-4">Contact</h4>
-            <ul className="space-y-2 text-sm text-gray-400">
+            <ul className="space-y-2 text-sm text-gray-300 font-medium">
               <li>(844) 922-0272</li>
               <li>info@cfi.ag</li>
             </ul>
@@ -60,14 +60,14 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-gray-500 text-sm">
+          <p className="text-gray-400 text-sm font-medium">
             &copy; {new Date().getFullYear()} CFi Solutions, Inc. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <a href="#" className="text-gray-500 hover:text-emerald-400 text-sm transition-colors">
+            <a href="#" className="text-gray-400 hover:text-emerald-400 text-sm font-medium transition-colors">
               Privacy Policy
             </a>
-            <a href="#" className="text-gray-500 hover:text-emerald-400 text-sm transition-colors">
+            <a href="#" className="text-gray-400 hover:text-emerald-400 text-sm font-medium transition-colors">
               Terms of Service
             </a>
           </div>
