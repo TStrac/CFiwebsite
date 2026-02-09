@@ -31,8 +31,8 @@ export default function Header() {
   return (
     <>
       {/* Transparent header - scrolls with page */}
-      <header className="absolute top-0 left-0 right-0 z-40 px-4 sm:px-6 pt-4">
-        <nav className="max-w-7xl mx-auto rounded-2xl px-4 sm:px-6 py-3 flex items-center justify-between bg-transparent">
+      <header className="absolute top-0 left-0 right-0 z-40 pt-4">
+        <nav className="w-full px-6 sm:px-12 lg:px-24 py-3 flex items-center justify-between bg-transparent">
           <Link to="/" className="shrink-0">
             <img src={asset('logo-cfi.png')} alt="CFi" className="h-10 sm:h-12 w-auto" />
           </Link>
