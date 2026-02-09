@@ -43,7 +43,6 @@ function AnimatedStat({ num, prefix, suffix, label, delay, text }: { num?: numbe
 
 function HomePage() {
   const [currentStat, setCurrentStat] = useState(0)
-  const [currentCategory, setCurrentCategory] = useState(0)
   const [currentCard, setCurrentCard] = useState(0)
   const introRef = useRef(null)
   const introInView = useInView(introRef, { once: true, margin: '-80px' })
@@ -71,13 +70,6 @@ function HomePage() {
     return () => clearInterval(interval)
   }, [mobileStats.length])
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentCategory((prev) => (prev + 1) % categories.length)
-    }, 3000)
-    return () => clearInterval(interval)
-  }, [categories.length])
-
   const infoCards = [
     { img: asset('carousel-corn-leaves.png'), title: 'How It', accent: 'Works.', items: [
       { bold: 'Embedded at Point of Sale', desc: 'Financing built directly into manufacturer programs.' },
@@ -85,17 +77,15 @@ function HomePage() {
       { bold: 'Immediate Approval & Funding', desc: 'Complete purchases without delays.' },
       { bold: 'Intelligence & Optimization', desc: 'Real-time data powers smarter decisions.' },
     ]},
-    { img: asset('carousel-corn-cob.png'), title: 'Ag Financing', accent: 'Platform.', items: [
-      { bold: 'Up to $1M Credit Lines', desc: 'Large approvals for serious growers.' },
-      { bold: 'Flexible Repayment', desc: 'Terms aligned to harvest cycles.' },
-      { bold: 'Same-Day Funding', desc: 'Retailers get paid fast, every time.' },
-      { bold: '100% Digital', desc: 'Zero paperwork, fully online process.' },
+    { img: asset('carousel-corn-cob.png'), title: 'The Fastest, Most Flexible', accent: 'Ag Financing Platform.', items: [
+      { bold: 'Lightning Speed', desc: 'Less than 10 minutes to apply with no tax returns required.' },
+      { bold: 'Instant Decisions', desc: 'Instant approvals up to $1M with same-day funding capability.' },
+      { bold: 'Seamless Integration', desc: 'Embedded directly into existing retailer and manufacturer.' },
     ]},
-    { img: asset('carousel-farmer.png'), title: 'Competitive', accent: 'Advantage.', items: [
-      { bold: 'Embedded at Point of Sale', desc: 'Offer financing directly within your existing workflow.' },
-      { bold: 'Branded Portals', desc: 'White-label retailer and grower portals, out of the box.' },
-      { bold: 'Seamless Integration', desc: 'Connects with your CRMs, ERPs, and commerce sites.' },
-      { bold: 'Dedicated Support', desc: 'Our team helps you integrate and launch with ease.' },
+    { img: asset('carousel-farmer.png'), title: 'Turn Financing Into Your', accent: 'Competitive Advantage.', cta: true, items: [
+      { bold: 'Point of Sale Financing', desc: 'Enable ag retailers and merchants to offer or embed financing directly at checkout.' },
+      { bold: 'Branded Portals', desc: 'Retailer and grower portals come out of the box, white-labeled for your business.' },
+      { bold: 'CRM & ERP Integration', desc: 'Our team helps integrate financing into your CRMs, ERPs, and commerce websites.' },
     ]},
   ]
 
@@ -276,6 +266,11 @@ function HomePage() {
                     </li>
                   ))}
                 </ul>
+                {'cta' in infoCards[currentCard] && (
+                  <Link to="/contact" className="inline-flex items-center justify-center mt-6 px-6 py-3 border-2 border-gray-900 text-gray-900 text-sm font-semibold uppercase tracking-wider rounded-full hover:bg-gray-900 hover:text-white transition-all">
+                    Connect With Our Team
+                  </Link>
+                )}
               </div>
             </div>
           </div>
@@ -314,6 +309,11 @@ function HomePage() {
                     </li>
                   ))}
                 </ul>
+                {'cta' in card && (
+                  <Link to="/contact" className="inline-flex items-center justify-center mt-6 px-6 py-3 border-2 border-gray-900 text-gray-900 text-sm font-semibold uppercase tracking-wider rounded-full hover:bg-gray-900 hover:text-white transition-all">
+                    Connect With Our Team
+                  </Link>
+                )}
               </div>
             </div>
           ))}
@@ -327,35 +327,45 @@ function HomePage() {
         </h2>
       </section>
 
-      {/* ============ CATEGORIES CAROUSEL ============ */}
+      {/* ============ CATEGORIES ============ */}
       <section className="py-8 md:py-12 px-4 sm:px-6 bg-[#f7faf5]">
         <div className="max-w-6xl mx-auto">
-          {/* Small screens: auto-cycling single card */}
-          <div className="lg:hidden">
-            <div className="flex flex-col items-center text-center">
-              <div 
-                key={currentCategory}
-                className="animate-fade-in flex flex-col items-center"
-              >
-                <div className="w-48 aspect-[5/6] rounded-2xl overflow-hidden mb-4">
-                  <img
-                    src={categories[currentCategory].img}
-                    alt={categories[currentCategory].label}
-                    className="w-full h-full object-cover scale-[1.02]"
-                  />
-                </div>
-                <span className="text-gray-900 font-medium text-base">{categories[currentCategory].label}</span>
-              </div>
-            </div>
-            <div className="flex justify-center gap-2 mt-4">
-              {categories.map((_, i) => (
-                <button
+          {/* Small screens: 3 over 2 layout */}
+          <div className="lg:hidden flex flex-col items-center gap-4">
+            {/* Top row: 3 across */}
+            <div className="flex justify-center gap-4">
+              {categories.slice(0, 3).map((item, i) => (
+                <motion.div
                   key={i}
-                  onClick={() => setCurrentCategory(i)}
-                  className={`w-2 h-2 rounded-full transition-colors ${
-                    i === currentCategory ? 'bg-emerald-700' : 'bg-gray-300'
-                  }`}
-                />
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.1 }}
+                  className="flex flex-col items-center w-[28vw] sm:w-[22vw]"
+                >
+                  <div className="w-full aspect-[5/6] rounded-2xl overflow-hidden mb-2 group cursor-pointer">
+                    <img src={item.img} alt={item.label} className="w-full h-full object-cover scale-[1.02]" />
+                  </div>
+                  <span className="text-gray-900 font-medium text-xs sm:text-sm text-center">{item.label}</span>
+                </motion.div>
+              ))}
+            </div>
+            {/* Bottom row: 2 centered below */}
+            <div className="flex justify-center gap-4">
+              {categories.slice(3, 5).map((item, i) => (
+                <motion.div
+                  key={i + 3}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: (i + 3) * 0.1 }}
+                  className="flex flex-col items-center w-[28vw] sm:w-[22vw]"
+                >
+                  <div className="w-full aspect-[5/6] rounded-2xl overflow-hidden mb-2 group cursor-pointer">
+                    <img src={item.img} alt={item.label} className="w-full h-full object-cover scale-[1.02]" />
+                  </div>
+                  <span className="text-gray-900 font-medium text-xs sm:text-sm text-center">{item.label}</span>
+                </motion.div>
               ))}
             </div>
           </div>
