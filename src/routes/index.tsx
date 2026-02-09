@@ -44,7 +44,16 @@ function AnimatedStat({ num, prefix, suffix, label, delay, text }: { num?: numbe
 function HomePage() {
   const [currentStat, setCurrentStat] = useState(0)
   const [currentCard, setCurrentCard] = useState(0)
-  const [heroVersion, setHeroVersion] = useState<'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g'>('a')
+  const heroVideos = [
+    { label: 'A', file: 'home-hero-a.mp4' },
+    { label: 'B', file: 'home-hero-b-new.mp4' },
+    { label: 'C', file: 'home-hero-e.mp4' },
+    { label: 'D', file: 'home-hero-d-new.mp4' },
+    { label: 'E', file: 'home-hero-e-new.mp4' },
+    { label: 'F', file: 'home-hero-f-new.mp4' },
+    { label: 'G', file: 'soyfield-preview.mp4' },
+  ]
+  const [heroVersion, setHeroVersion] = useState(0)
   const introRef = useRef(null)
   const introInView = useInView(introRef, { once: true, margin: '-80px' })
 
@@ -101,26 +110,18 @@ function HomePage() {
     <div className="min-h-screen bg-[#f7faf5] overflow-x-hidden">
       {/* ============ HERO VERSION TABS ============ */}
       <div className="fixed bottom-6 right-6 z-[60] flex gap-2 bg-white/90 backdrop-blur-md rounded-lg shadow-lg p-2 border border-gray-200">
-        {[
-          { key: 'a' as const, label: 'A' },
-          { key: 'b' as const, label: 'B' },
-          { key: 'e' as const, label: 'C' },
-          { key: 'c' as const, label: 'D' },
-          { key: 'f' as const, label: 'E' },
-          { key: 'd' as const, label: 'F' },
-          { key: 'g' as const, label: 'G' },
-        ].map((tab) => (
+        {heroVideos.map((v, i) => (
           <button
-            key={tab.key}
+            key={v.label}
             type="button"
-            onClick={() => setHeroVersion(tab.key)}
+            onClick={() => setHeroVersion(i)}
             className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all ${
-              heroVersion === tab.key
+              heroVersion === i
                 ? 'bg-emerald-700 text-white'
                 : 'text-gray-600 hover:bg-gray-100'
             }`}
           >
-            {tab.label}
+            {v.label}
           </button>
         ))}
       </div>
@@ -137,15 +138,7 @@ function HomePage() {
             playsInline
             className="w-full h-full object-cover"
           >
-            <source src={asset(
-              heroVersion === 'a' ? 'home-hero-a.mp4' 
-              : heroVersion === 'b' ? 'home-hero-b.mp4' 
-              : heroVersion === 'c' ? 'home-hero-c.mp4'
-              : heroVersion === 'e' ? 'home-hero-e.mp4'
-              : heroVersion === 'f' ? 'home-hero-f.mp4'
-              : heroVersion === 'g' ? 'soyfield-preview.mp4'
-              : 'home-hero-video.mp4'
-            )} type="video/mp4" />
+            <source src={asset(heroVideos[heroVersion].file)} type="video/mp4" />
           </video>
           {/* Gradient overlay for text readability */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
