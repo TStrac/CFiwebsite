@@ -44,6 +44,7 @@ function AnimatedStat({ num, prefix, suffix, label, delay, text }: { num?: numbe
 function HomePage() {
   const [currentStat, setCurrentStat] = useState(0)
   const [currentCard, setCurrentCard] = useState(0)
+  const [heroVersion, setHeroVersion] = useState<'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g'>('a')
   const introRef = useRef(null)
   const introInView = useInView(introRef, { once: true, margin: '-80px' })
 
@@ -98,18 +99,53 @@ function HomePage() {
 
   return (
     <div className="min-h-screen bg-[#f7faf5] overflow-x-hidden">
+      {/* ============ HERO VERSION TABS ============ */}
+      <div className="fixed bottom-6 right-6 z-[60] flex gap-2 bg-white/90 backdrop-blur-md rounded-lg shadow-lg p-2 border border-gray-200">
+        {[
+          { key: 'a' as const, label: 'A' },
+          { key: 'b' as const, label: 'B' },
+          { key: 'e' as const, label: 'C' },
+          { key: 'c' as const, label: 'D' },
+          { key: 'f' as const, label: 'E' },
+          { key: 'd' as const, label: 'F' },
+          { key: 'g' as const, label: 'G' },
+        ].map((tab) => (
+          <button
+            key={tab.key}
+            type="button"
+            onClick={() => setHeroVersion(tab.key)}
+            className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all ${
+              heroVersion === tab.key
+                ? 'bg-emerald-700 text-white'
+                : 'text-gray-600 hover:bg-gray-100'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
       {/* ============ HERO SECTION ============ */}
       <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
         {/* Background Video */}
         <div className="absolute inset-0 z-0">
           <video
+            key={heroVersion}
             autoPlay
             muted
             loop
             playsInline
             className="w-full h-full object-cover"
           >
-            <source src={asset('teavalley-preview.mp4')} type="video/mp4" />
+            <source src={asset(
+              heroVersion === 'a' ? 'home-hero-a.mp4' 
+              : heroVersion === 'b' ? 'home-hero-b.mp4' 
+              : heroVersion === 'c' ? 'home-hero-c.mp4'
+              : heroVersion === 'e' ? 'home-hero-e.mp4'
+              : heroVersion === 'f' ? 'home-hero-f.mp4'
+              : heroVersion === 'g' ? 'soyfield-preview.mp4'
+              : 'home-hero-video.mp4'
+            )} type="video/mp4" />
           </video>
           {/* Gradient overlay for text readability */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
@@ -267,8 +303,9 @@ function HomePage() {
                   ))}
                 </ul>
                 {'cta' in infoCards[currentCard] && (
-                  <Link to="/contact" className="inline-flex items-center justify-center mt-6 px-6 py-3 border-2 border-gray-900 text-gray-900 text-sm font-semibold uppercase tracking-wider rounded-lg hover:bg-gray-900 hover:text-white transition-all">
+                  <Link to="/contact" className="inline-flex items-center gap-2 mt-6 bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-3 rounded-lg font-semibold text-sm transition-colors">
                     Connect With Our Team
+                    <ArrowRight className="w-4 h-4" />
                   </Link>
                 )}
               </div>
@@ -310,8 +347,9 @@ function HomePage() {
                   ))}
                 </ul>
                 {'cta' in card && (
-                  <Link to="/contact" className="inline-flex items-center justify-center mt-6 px-6 py-3 border-2 border-gray-900 text-gray-900 text-sm font-semibold uppercase tracking-wider rounded-lg hover:bg-gray-900 hover:text-white transition-all">
+                  <Link to="/contact" className="inline-flex items-center gap-2 mt-6 bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-3 rounded-lg font-semibold text-sm transition-colors">
                     Connect With Our Team
+                    <ArrowRight className="w-4 h-4" />
                   </Link>
                 )}
               </div>
