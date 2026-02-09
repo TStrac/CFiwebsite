@@ -91,7 +91,7 @@ function CfiInActionCarousel() {
 }
 
 function RetailersPage() {
-  const [activeTab, setActiveTab] = useState<'growers' | 'business'>('growers')
+  const [activeTab, setActiveTab] = useState<'growers' | 'business'>('business')
 
   return (
     <div className="min-h-screen bg-[#f7faf5] overflow-x-hidden">
@@ -130,16 +130,6 @@ function RetailersPage() {
           <div className="flex justify-center mb-12">
             <div className="inline-flex bg-[#dde6d5] rounded-full p-1">
               <button
-                onClick={() => setActiveTab('growers')}
-                className={`px-6 sm:px-8 py-3 rounded-full text-sm font-semibold transition-all ${
-                  activeTab === 'growers'
-                    ? 'bg-emerald-700 text-white shadow-md'
-                    : 'text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                CFi for Growers
-              </button>
-              <button
                 onClick={() => setActiveTab('business')}
                 className={`px-6 sm:px-8 py-3 rounded-full text-sm font-semibold transition-all ${
                   activeTab === 'business'
@@ -148,6 +138,16 @@ function RetailersPage() {
                 }`}
               >
                 CFi for Your Business
+              </button>
+              <button
+                onClick={() => setActiveTab('growers')}
+                className={`px-6 sm:px-8 py-3 rounded-full text-sm font-semibold transition-all ${
+                  activeTab === 'growers'
+                    ? 'bg-emerald-700 text-white shadow-md'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                CFi for Growers
               </button>
             </div>
           </div>
@@ -179,10 +179,10 @@ function RetailersPage() {
               </div>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white px-8 py-4 rounded-full font-bold text-lg transition-colors"
+                className="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-bold text-sm sm:text-lg transition-colors"
               >
                 Sign Up
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </Link>
             </div>
           ) : (
@@ -210,10 +210,10 @@ function RetailersPage() {
               </div>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white px-8 py-4 rounded-full font-bold text-lg transition-colors"
+                className="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-bold text-sm sm:text-lg transition-colors"
               >
                 Sign Up
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </Link>
             </div>
           )}
@@ -307,7 +307,7 @@ function RetailersPage() {
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 bg-emerald-700 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-emerald-800 transition-colors"
+            className="inline-flex items-center gap-2 bg-emerald-700 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-emerald-800 transition-colors"
           >
             Contact Us
             <ArrowRight className="w-5 h-5" />

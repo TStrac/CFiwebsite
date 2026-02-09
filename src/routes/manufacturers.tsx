@@ -1,11 +1,40 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { asset } from '@/lib/asset'
 
 export const Route = createFileRoute('/manufacturers')({ component: ManufacturersPage })
 
+const enablerCards = [
+  { icon: '📊', title: 'SKU-Level Sales Intelligence', desc: 'Track individual product performance across your entire retailer network in real time.' },
+  { icon: '📈', title: 'Category Benchmarking', desc: 'Compare performance against competitors and track adoption trends across categories.' },
+  { icon: '🗺️', title: 'Regional Movement Heatmaps', desc: 'Visualize geographic demand patterns and identify emerging markets before anyone else.' },
+]
+
+const outcomeCards = [
+  { title: 'Align Marketing Investment', desc: 'Connect marketing spend directly to demand with measurable ROI.', bg: 'bg-emerald-800' },
+  { title: 'Optimize Sales Deployment', desc: 'Deploy sales resources to highest conversion regions based on performance data.', bg: 'bg-emerald-700' },
+  { title: 'Launch With Precision', desc: 'Introduce new products with data-backed confidence and reduced risk.', bg: 'bg-emerald-600' },
+]
+
 function ManufacturersPage() {
+  const [currentEnabler, setCurrentEnabler] = useState(0)
+  const [currentOutcome, setCurrentOutcome] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentEnabler((prev) => (prev + 1) % enablerCards.length)
+    }, 4500)
+    return () => clearInterval(interval)
+  }, [])
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentOutcome((prev) => (prev + 1) % outcomeCards.length)
+    }, 4500)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <div className="min-h-screen bg-[#f7faf5] overflow-x-hidden">
       {/* ============ HERO ============ */}
@@ -95,25 +124,32 @@ function ManufacturersPage() {
               Only Platform Combining <span className="text-emerald-700">Financing Power With Intelligence</span> at Scale
             </h2>
           </div>
-          {/* Icon-left horizontal cards */}
-          <div className="space-y-6">
-            {[
-              {
-                icon: '📊',
-                title: 'SKU-Level Sales Intelligence',
-                desc: 'Track individual product performance across your entire retailer network in real time.',
-              },
-              {
-                icon: '📈',
-                title: 'Category Benchmarking',
-                desc: 'Compare performance against competitors and track adoption trends across categories.',
-              },
-              {
-                icon: '🗺️',
-                title: 'Regional Movement Heatmaps',
-                desc: 'Visualize geographic demand patterns and identify emerging markets before anyone else.',
-              },
-            ].map((item, i) => (
+          {/* Mobile: auto-cycling single card */}
+          <div className="sm:hidden">
+            <div key={currentEnabler} className="animate-fade-in bg-white rounded-xl p-6 shadow-md flex items-start gap-5 min-h-[120px]">
+              <span className="text-3xl shrink-0">{enablerCards[currentEnabler].icon}</span>
+              <div>
+                <h3 className="text-lg font-bold text-gray-900 mb-2">{enablerCards[currentEnabler].title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{enablerCards[currentEnabler].desc}</p>
+              </div>
+            </div>
+            <div className="flex justify-center gap-2 mt-4">
+              {enablerCards.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => setCurrentEnabler(i)}
+                  className={`w-2 h-2 rounded-full transition-colors ${
+                    i === currentEnabler ? 'bg-emerald-700' : 'bg-gray-400'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Tablet+: stacked cards */}
+          <div className="hidden sm:block space-y-6">
+            {enablerCards.map((item, i) => (
               <div key={i} className="bg-white rounded-xl p-6 sm:p-8 shadow-md flex items-start gap-5">
                 <span className="text-3xl shrink-0">{item.icon}</span>
                 <div>
@@ -224,13 +260,29 @@ function ManufacturersPage() {
               By empowering retail partners with financing and intelligence at the point of sale.
             </p>
           </div>
-          {/* Large feature blocks */}
-          <div className="grid md:grid-cols-3 gap-0 rounded-2xl overflow-hidden shadow-lg">
-            {[
-              { title: 'Align Marketing Investment', desc: 'Connect marketing spend directly to demand with measurable ROI.', bg: 'bg-emerald-800' },
-              { title: 'Optimize Sales Deployment', desc: 'Deploy sales resources to highest conversion regions based on performance data.', bg: 'bg-emerald-700' },
-              { title: 'Launch With Precision', desc: 'Introduce new products with data-backed confidence and reduced risk.', bg: 'bg-emerald-600' },
-            ].map((item, i) => (
+          {/* Mobile: auto-cycling single card */}
+          <div className="md:hidden">
+            <div key={currentOutcome} className={`animate-fade-in ${outcomeCards[currentOutcome].bg} rounded-2xl p-8 text-white min-h-[160px]`}>
+              <h3 className="text-xl font-bold mb-3">{outcomeCards[currentOutcome].title}</h3>
+              <p className="text-emerald-100 text-sm leading-relaxed">{outcomeCards[currentOutcome].desc}</p>
+            </div>
+            <div className="flex justify-center gap-2 mt-4">
+              {outcomeCards.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => setCurrentOutcome(i)}
+                  className={`w-2 h-2 rounded-full transition-colors ${
+                    i === currentOutcome ? 'bg-emerald-700' : 'bg-gray-300'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Tablet+: 3-column feature blocks */}
+          <div className="hidden md:grid md:grid-cols-3 gap-0 rounded-2xl overflow-hidden shadow-lg">
+            {outcomeCards.map((item, i) => (
               <div key={i} className={`${item.bg} p-8 sm:p-10 text-white`}>
                 <h3 className="text-xl font-bold mb-3">{item.title}</h3>
                 <p className="text-emerald-100 text-sm leading-relaxed">{item.desc}</p>
@@ -250,20 +302,20 @@ function ManufacturersPage() {
             Let your dealer network offer instant financing, driving incremental sales and growth for your business.
           </p>
         </div>
-        <div className="max-w-3xl mx-auto grid grid-cols-3 gap-8">
+        <div className="max-w-3xl mx-auto grid grid-cols-3 gap-4 sm:gap-8">
           {[
             { value: '$800M+', label: 'Financing enabled annually' },
             { value: '100+', label: 'Active retail partners' },
             { value: '<10 Min.', label: 'Paperless application' },
           ].map((stat, i) => (
             <div key={i} className="text-center">
-              <div className="text-3xl sm:text-4xl font-black text-emerald-800">{stat.value}</div>
-              <div className="text-sm text-gray-600 mt-1">{stat.label}</div>
+              <div className="text-xl sm:text-3xl md:text-4xl font-black text-emerald-800 whitespace-nowrap">{stat.value}</div>
+              <div className="text-xs sm:text-sm text-gray-600 mt-1">{stat.label}</div>
             </div>
           ))}
         </div>
         <div className="max-w-md mx-auto mt-12 text-center">
-          <ul className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-sm text-gray-600 mb-8">
+          <ul className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-xs sm:text-sm text-gray-600 mb-8">
             <li className="flex items-center gap-2">
               <span className="text-emerald-600">&#10003;</span> Free sign-up
             </li>
@@ -276,7 +328,7 @@ function ManufacturersPage() {
           </ul>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white px-8 py-4 rounded-full font-bold text-lg transition-colors"
+            className="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-bold text-sm sm:text-lg transition-colors"
           >
             Get Started
             <ArrowRight className="w-5 h-5" />
@@ -310,7 +362,7 @@ function ManufacturersPage() {
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 bg-emerald-700 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-emerald-800 transition-colors"
+            className="inline-flex items-center gap-2 bg-emerald-700 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-emerald-800 transition-colors"
           >
             Contact Us
             <ArrowRight className="w-5 h-5" />

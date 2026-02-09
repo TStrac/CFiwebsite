@@ -66,7 +66,7 @@ function HomePage() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentStat((prev) => (prev + 1) % mobileStats.length)
-    }, 2500)
+    }, 4500)
     return () => clearInterval(interval)
   }, [mobileStats.length])
 
@@ -92,7 +92,7 @@ function HomePage() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentCard((prev) => (prev + 1) % infoCards.length)
-    }, 4000)
+    }, 4500)
     return () => clearInterval(interval)
   }, [infoCards.length])
 
@@ -267,7 +267,7 @@ function HomePage() {
                   ))}
                 </ul>
                 {'cta' in infoCards[currentCard] && (
-                  <Link to="/contact" className="inline-flex items-center justify-center mt-6 px-6 py-3 border-2 border-gray-900 text-gray-900 text-sm font-semibold uppercase tracking-wider rounded-full hover:bg-gray-900 hover:text-white transition-all">
+                  <Link to="/contact" className="inline-flex items-center justify-center mt-6 px-6 py-3 border-2 border-gray-900 text-gray-900 text-sm font-semibold uppercase tracking-wider rounded-lg hover:bg-gray-900 hover:text-white transition-all">
                     Connect With Our Team
                   </Link>
                 )}
@@ -310,7 +310,7 @@ function HomePage() {
                   ))}
                 </ul>
                 {'cta' in card && (
-                  <Link to="/contact" className="inline-flex items-center justify-center mt-6 px-6 py-3 border-2 border-gray-900 text-gray-900 text-sm font-semibold uppercase tracking-wider rounded-full hover:bg-gray-900 hover:text-white transition-all">
+                  <Link to="/contact" className="inline-flex items-center justify-center mt-6 px-6 py-3 border-2 border-gray-900 text-gray-900 text-sm font-semibold uppercase tracking-wider rounded-lg hover:bg-gray-900 hover:text-white transition-all">
                     Connect With Our Team
                   </Link>
                 )}
@@ -514,7 +514,7 @@ function HomePage() {
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 bg-emerald-700 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-emerald-800 transition-colors"
+            className="inline-flex items-center gap-2 bg-emerald-700 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-emerald-800 transition-colors"
           >
             Contact Us
             <ArrowRight className="w-5 h-5" />
